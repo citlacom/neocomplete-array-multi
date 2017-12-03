@@ -1,27 +1,25 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! neocomplete#filters#multi_array_parts#define() "{{{
-  "echomsg string(Backtrace(expand('<sfile>')))
+function! neocomplete#filters#converter_remove_lead_trail_quotes#define() "{{{
   return s:converter
 endfunction"}}}
 
 let s:converter = {
-      \ 'name' : 'multi_array_parts',
-      \ 'description' : 'Form a multi dimensional array part suggestions as candidates.',
+      \ 'name' : 'converter_remove_lead_trail_quotes',
+      \ 'description' : 'Remove the leading and trailing quotes and suggest as candidates',
       \}
 
 function! s:converter.filter(context) "{{{
   let candidates = []
-  let pattern = '\[[''"][[:alnum:]_\-#\$]\+[''"]\]*\]$'
-  "call prettyprint#echo(prettyprint#prettyprint(a:context), 1, 1)
+  let pattern = '^''\|''$'
 
   for candidate in a:context.candidates
     call add(candidates, candidate)
     let newcandidate = copy(candidate)
     while (newcandidate.word =~ pattern)
       let newcandidate.word = substitute(newcandidate.word, pattern, '', '')
-      call add(candidates, copy(newcandidate))
+      call add(candidates, newcandidate)
     endwhile
   endfor
 
