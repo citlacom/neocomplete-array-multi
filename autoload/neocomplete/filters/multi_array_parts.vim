@@ -1,20 +1,19 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! neocomplete#filters#converter_array_dim#define() "{{{
+function! neocomplete#filters#multi_array_parts#define() "{{{
   "echomsg string(Backtrace(expand('<sfile>')))
   return s:converter
 endfunction"}}}
 
 let s:converter = {
-      \ 'name' : 'converter_array_dim',
-      \ 'description' : 'Form a multi dimensional array remove recursively the dimensions and suggest as candidates',
+      \ 'name' : 'multi_array_parts',
+      \ 'description' : 'Form a multi dimensional array part suggestions as candidates.',
       \}
 
 function! s:converter.filter(context) "{{{
   let candidates = []
   let pattern = '\[[''"][[:alnum:]_\-#\$]\+[''"]\]*\]$'
-  echom "Processing array_dim filter."
   "call prettyprint#echo(prettyprint#prettyprint(a:context), 1, 1)
 
   for candidate in a:context.candidates

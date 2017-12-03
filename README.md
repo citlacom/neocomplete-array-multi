@@ -1,4 +1,4 @@
-# neocomplete-array-multi
+# neocomplete-multi-array
 Neocomplete filters that allow to complete multi-dimensional PHP arrays from a variable name.
 
 E.x:
